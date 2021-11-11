@@ -68,6 +68,20 @@ async function run (){
             res.json(result);
         });
 
+        //UPDATED API
+        app.put("/myBooking/:id", async(req, res)=>{
+            const id = req.params.id;
+            const updateStatus = req.body;
+            const filter = {_id:ObjectId(id)};
+            const updateDoc = {
+                $set: {
+                  status: updateStatus.status
+                },
+              };
+            const result = await myBookingCollection.updateOne(filter,updateDoc);
+            res.json(result);
+        });
+
         // DELETE MY BOOKING API
         app.delete('/myBooking/:id', async (req , res) =>{
             const id = req.params.id;
